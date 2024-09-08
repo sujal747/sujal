@@ -1,4 +1,3 @@
-<script language=JavaScript>
 var message = "";
 function clickIE() {
     if (document.all) {
@@ -24,7 +23,6 @@ if (document.layers) {
 }
 
 document.oncontextmenu = new Function("return false")
-</script>
 (function ($) {
 	"use strict";
 	var nav = $('nav');
