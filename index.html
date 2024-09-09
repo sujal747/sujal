@@ -817,54 +817,55 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
     function showPopup() {
-      $('#overlay').fadeIn();  // Show the blurred background
-      $('#popup').fadeIn();    // Show the popup
-      document.body.style.overflow = 'hidden'; // Disable scroll
-      document.addEventListener('mousedown', preventInteraction, { passive: false });
-    }
+  $('#overlay').fadeIn();  // Show the blurred background
+  $('#popup').fadeIn();    // Show the popup
+  document.body.style.overflow = 'hidden'; // Disable scroll
+  document.addEventListener('mousedown', preventInteraction, { passive: false });
+}
 
-    function hidePopup() {
-      $('#overlay').fadeOut(); // Hide the blurred background
-      $('#popup').fadeOut();   // Hide the popup
-      document.body.style.overflow = ''; // Re-enable scroll
-      document.removeEventListener('mousedown', preventInteraction);
-    }
+function hidePopup() {
+  $('#overlay').fadeOut(); // Hide the blurred background
+  $('#popup').fadeOut();   // Hide the popup
+  document.body.style.overflow = ''; // Re-enable scroll
+  document.removeEventListener('mousedown', preventInteraction);
+}
 
-    function preventInteraction(e) {
-      if (!e.target.closest('#popup') && !e.target.closest('.contactForm')) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }
+function preventInteraction(e) {
+  if (!e.target.closest('#popup') && !e.target.closest('.contactForm')) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}
 
-    document.onkeydown = function (e) {
-      if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || (e.shiftKey && e.keyCode === 73))) {
-        showPopup();
-        return false;
-      }
-      if (e.keyCode === 123) {
-        showPopup();
-        return false;
-      }
-      return true;
-    };
+document.onkeydown = function (e) {
+  if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 83 || e.keyCode === 85 || (e.shiftKey && e.keyCode === 73))) {
+    showPopup();  // Show the popup if Ctrl + C, Ctrl + V, Ctrl + S, Ctrl + U, or Shift + Ctrl + I are pressed
+    return false; // Prevent the default action
+  }
+  if (e.keyCode === 123) { // Block F12 (DevTools)
+    showPopup();
+    return false;
+  }
+  return true;
+};
 
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-      showPopup();
-    });
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+  showPopup();
+});
 
-    $(document).keypress("u", function (e) {
-      if (e.ctrlKey) {
-        showPopup();
-        return false;
-      }
-      return true;
-    });
+$(document).keypress("u", function (e) {
+  if (e.ctrlKey) {
+    showPopup();
+    return false;
+  }
+  return true;
+});
 
-    $('#closePopup').click(function () {
-      hidePopup(); // Hide popup and overlay when "Got It!" is clicked
-    });
+$('#closePopup').click(function () {
+  hidePopup(); // Hide popup and overlay when "Got It!" is clicked
+});
+
   </script>
   <script>
     document.addEventListener('contextmenu', function (e) {
